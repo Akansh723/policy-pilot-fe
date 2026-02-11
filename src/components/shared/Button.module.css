@@ -1,0 +1,40 @@
+.button {
+  padding: 16px 32px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.primary {
+  background: #10b981;
+  color: white;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.primary:hover {
+  background: #059669;
+}
+
+.primary:active {
+  transform: scale(0.98);
+}
+
+.secondary {
+  background: #f1f5f9;
+  color: #36454F;
+}
+
+.secondary:hover {
+  background: #e2e8f0;
+}
+
+.secondary:active {
+  transform: scale(0.98);
+}

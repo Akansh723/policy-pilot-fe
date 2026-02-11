@@ -1,0 +1,246 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+}
+
+.main {
+  flex: 1;
+  max-width: 448px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 160px;
+}
+
+.progress {
+  padding: 24px 16px 8px;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.stepText {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #10b981;
+}
+
+.finalText {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.progressBar {
+  height: 6px;
+  width: 100%;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #10b981;
+  border-radius: 9999px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  padding: 24px 16px 16px;
+}
+
+.policyCard {
+  margin: 0 16px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+}
+
+.cardImage {
+  width: 100%;
+  aspect-ratio: 16/7;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.priceSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.priceLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #10b981;
+  margin-bottom: 4px;
+}
+
+.priceAmount {
+  font-size: 30px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.pricePeriod {
+  font-size: 16px;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.badge {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.details {
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detailRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.detailText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #36454F;
+  line-height: 1.5;
+}
+
+.agreementBox {
+  margin: 0 16px;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.checkbox {
+  display: flex;
+  gap: 12px;
+  padding: 12px 8px;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  margin-top: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid #cbd5e1;
+  accent-color: #10b981;
+}
+
+.agreementText {
+  font-size: 14px;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+.link {
+  color: #10b981;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(16, 185, 129, 0.3);
+}
+
+.helpSection {
+  display: flex;
+  justify-center: flex-start;
+  margin-top: 48px;
+  padding: 0 16px 48px;
+}
+
+.helpButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.helpButton:hover {
+  color: #1f2937;
+}
+
+.helpIcon {
+  font-size: 18px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 448px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid #e2e8f0;
+  padding: 16px;
+  padding-bottom: 32px;
+  z-index: 50;
+}
+
+.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.secureText {
+  text-align: center;
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}

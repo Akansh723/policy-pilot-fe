@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.stepText {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(51, 65, 85, 0.6);
+}
+
+.percentage {
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+}
+
+.bar {
+  height: 6px;
+  width: 100%;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: #059669;
+  transition: width 0.7s ease-out;
+}

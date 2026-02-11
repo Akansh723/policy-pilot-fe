@@ -1,0 +1,54 @@
+.container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.header {
+  padding: 16px;
+  padding-top: 20px;
+  padding-bottom: 12px;
+}
+
+.title {
+  color: var(--charcoal-900);
+  letter-spacing: -0.02em;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.subtitle {
+  color: var(--charcoal-500);
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--charcoal-100);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--charcoal-500);
+  font-weight: 500;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--charcoal-900);
+}
