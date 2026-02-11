@@ -1,5 +1,6 @@
 import React from 'react';
-import { VehicleData } from '../App';
+import { Button } from '../../components/shared/Button';
+import { VehicleData } from '../../App';
 import styles from './PurchaseSuccess.module.css';
 
 interface PurchaseSuccessProps {
@@ -71,9 +72,9 @@ export const PurchaseSuccess: React.FC<PurchaseSuccessProps> = ({ vehicleData, p
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.primaryButton} onClick={() => window.location.href = '/'}>
+          <Button onClick={() => window.location.href = '/'}>
             Return to Home
-          </button>
+          </Button>
         </div>
       </main>
 

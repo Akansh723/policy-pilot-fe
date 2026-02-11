@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Header } from '../components/shared/Header';
-import { Button } from '../components/shared/Button';
-import { updateProfile } from '../api/userApi';
+import { Header } from '../../components/shared/Header';
+import { Button } from '../../components/shared/Button';
+import { updateProfile } from '../../api/userApi';
 import styles from './UserDetails.module.css';
 
 interface UserDetailsProps {

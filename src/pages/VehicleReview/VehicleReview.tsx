@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Header } from '../components/shared/Header';
-import { Button } from '../components/shared/Button';
-import { VehicleData } from '../App';
-import { getPolicySuggestions, PolicySuggestion } from '../api/policyApi';
+import { Header } from '../../components/shared/Header';
+import { Button } from '../../components/shared/Button';
+import { VehicleData } from '../../App';
+import { getPolicySuggestions, PolicySuggestion } from '../../api/policyApi';
 import styles from './VehicleReview.module.css';
 
 interface VehicleReviewProps {

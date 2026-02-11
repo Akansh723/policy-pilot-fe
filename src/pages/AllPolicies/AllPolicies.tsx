@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMyPolicies, MyPolicy } from '../api/policyApi';
+import { getMyPolicies, MyPolicy } from '../../api/policyApi';
 import styles from './AllPolicies.module.css';
 
 export const AllPolicies: React.FC = () => {

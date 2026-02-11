@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMyPolicies, MyPolicy } from '../api/policyApi';
-import { getUserProfile } from '../api/userApi';
+import { getMyPolicies, MyPolicy } from '../../api/policyApi';
+import { getUserProfile } from '../../api/userApi';
 import styles from './Dashboard.module.css';
 
 export const Dashboard: React.FC = () => {

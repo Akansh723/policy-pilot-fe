@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Header } from '../components/shared/Header';
-import { Button } from '../components/shared/Button';
+import { Header } from '../../components/shared/Header';
+import { Button } from '../../components/shared/Button';
 import styles from './Registration.module.css';
 
 interface RegistrationProps {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../components/shared/Button';
+import { Button } from '../../components/shared/Button';
 import styles from './Home.module.css';
 
 interface HomeProps {
@@ -7,10 +7,10 @@ interface HomeProps {
 }
 
 const perks = [
-  { icon: '⏱️', title: 'Instant Quotes', desc: 'Price in under 2 minutes.' },
-  { icon: '🎧', title: '24/7 Support', desc: 'Human help anytime.' },
-  { icon: '📱', title: 'Digital ID', desc: 'Instant proof on phone.' },
-  { icon: '📊', title: 'Fair Pricing', desc: 'Based on how you drive.' },
+  { title: 'Instant Quotes', desc: 'Price in under 2 minutes.' },
+  { title: '24/7 Support', desc: 'Human help anytime.' },
+  { title: 'Digital ID', desc: 'Instant proof on phone.' },
+  { title: 'Fair Pricing', desc: 'Based on how you drive.' },
 ];
 
 export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
@@ -68,7 +68,6 @@ export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
         <div className={styles.perksGrid}>
           {perks.map((perk, index) => (
             <div key={index} className={styles.perkCard}>
-              <div className={styles.perkIcon}>{perk.icon}</div>
               <h3 className={styles.perkTitle}>{perk.title}</h3>
               <p className={styles.perkDesc}>{perk.desc}</p>
             </div>

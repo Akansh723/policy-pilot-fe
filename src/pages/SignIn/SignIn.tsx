@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from '../components/shared/Button';
-import { requestOtp, verifyOtp } from '../api/authApi';
+import { Button } from '../../components/shared/Button';
+import { requestOtp, verifyOtp } from '../../api/authApi';
 import styles from './SignIn.module.css';
 
 interface SignInProps {
@@ -118,9 +118,6 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
       <main className={isStandalone ? styles.standaloneMain : styles.main}>
         {isStandalone && (
           <div className={styles.standaloneHero}>
-            <div className={styles.iconBox}>
-              <span className={styles.icon}>🛡️</span>
-            </div>
             <h1 className={styles.standaloneTitle}>
               <span className={styles.titleBold}>Welcome back</span>
             </h1>
@@ -131,18 +128,12 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
         {!isStandalone && (
         <div className={styles.premiumCard}>
           <div className={styles.cardBg} />
-          <div className={styles.cardIcon}>
-            <span>🛡️</span>
-          </div>
           <div className={styles.cardContent}>
             <p className={styles.cardLabel}>QUOTE SECURED</p>
             <div className={styles.cardPrice}>
               <p className={styles.priceAmount}>₹{totalPremium?.toLocaleString() || '0'}</p>
               <p className={styles.pricePeriod}>/ year</p>
             </div>
-          </div>
-          <div className={styles.cardDecor}>
-            <span>🚗</span>
           </div>
           </div>
         )}
@@ -171,7 +162,6 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value.replace(/\D/g, ''))}
                   />
-                  <span className={styles.inputIcon}>📱</span>
                 </div>
               </div>
 
@@ -180,7 +170,6 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
               {isStandalone ? (
                 <button className={styles.standaloneButton} onClick={handleSendCode} disabled={isLoading}>
                   <span>{isLoading ? 'Sending...' : 'Send Secure Code'}</span>
-                  <span>⚡</span>
                 </button>
               ) : (
                 <Button onClick={handleSendCode} disabled={isLoading}>
@@ -216,7 +205,6 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
               {isStandalone ? (
                 <button className={styles.standaloneButton} onClick={handleVerifyOtp} disabled={isLoading}>
                   <span>{isLoading ? 'Verifying...' : 'Verify & Continue'}</span>
-                  <span>→</span>
                 </button>
               ) : (
                 <Button onClick={handleVerifyOtp} disabled={isLoading}>
@@ -243,7 +231,6 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
               <span>Google</span>
             </button>
             <button className={styles.socialButton}>
-              <span className={styles.appleIcon}>🍎</span>
               <span>Apple</span>
             </button>
           </div>

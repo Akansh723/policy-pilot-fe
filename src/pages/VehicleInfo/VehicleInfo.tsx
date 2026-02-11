@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header } from '../components/shared/Header';
-import { VehicleData } from '../App';
-import { getByLicensePlate } from '../api/vehicleApi';
+import { Header } from '../../components/shared/Header';
+import { Button } from '../../components/shared/Button';
+import { VehicleData } from '../../App';
+import { getByLicensePlate } from '../../api/vehicleApi';
 import styles from './VehicleInfo.module.css';
 
 interface VehicleInfoProps {
@@ -86,16 +87,14 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
                   value={licensePlate}
                   onChange={(e) => setLicensePlate(e.target.value.toUpperCase())}
                 />
-                <span className={styles.searchIcon}>🔍</span>
               </div>
             </label>
-            <button 
-              className={styles.primaryButton} 
+            <Button 
               onClick={handleSearch}
               disabled={!licensePlate.trim() || isSearching}
             >
               {isSearching ? 'Searching...' : 'Find My Car'}
-            </button>
+            </Button>
             {searchError && <p className={styles.error}>{searchError}</p>}
           </div>
         </div>
@@ -219,9 +218,6 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
           <div className={styles.radioGroup}>
             <label className={usageType === 'personal' ? styles.radioOptionActive : styles.radioOption}>
               <div className={styles.radioContent}>
-                <div className={usageType === 'personal' ? styles.radioIconActive : styles.radioIcon}>
-                  <span>🚗</span>
-                </div>
                 <span className={styles.radioLabel}>Personal</span>
               </div>
               <input
@@ -234,9 +230,6 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
             </label>
             <label className={usageType === 'commercial' ? styles.radioOptionActive : styles.radioOption}>
               <div className={styles.radioContent}>
-                <div className={styles.radioIcon}>
-                  <span>💼</span>
-                </div>
                 <span className={styles.radioLabel}>Commercial</span>
               </div>
               <input
@@ -252,8 +245,7 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
       </main>
 
       <footer className={styles.footer}>
-        <button 
-          className={styles.continueButton} 
+        <Button 
           onClick={() => onNext({
             licensePlate,
             ownerName,
@@ -270,7 +262,7 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
         >
           Continue to Step 2
           <span>→</span>
-        </button>
+        </Button>
       </footer>
     </>
   );

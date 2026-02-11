@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Header } from '../components/shared/Header';
-import { Button } from '../components/shared/Button';
-import { PolicySuggestion } from '../api/policyApi';
-import { purchasePolicy } from '../api/userApi';
-import { VehicleData } from '../App';
+import { Header } from '../../components/shared/Header';
+import { Button } from '../../components/shared/Button';
+import { PolicySuggestion } from '../../api/policyApi';
+import { purchasePolicy } from '../../api/userApi';
+import { VehicleData } from '../../App';
 import styles from './PolicyReview.module.css';
 
 interface PolicyReviewProps {

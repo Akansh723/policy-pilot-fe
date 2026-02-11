@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Header } from '../components/shared/Header';
-import { Button } from '../components/shared/Button';
-import { Toggle } from '../components/shared/Toggle';
-import { PolicySuggestion } from '../api/policyApi';
+import { Header } from '../../components/shared/Header';
+import { Button } from '../../components/shared/Button';
+import { Toggle } from '../../components/shared/Toggle';
+import { PolicySuggestion } from '../../api/policyApi';
 import styles from './QuoteResults.module.css';
 
 interface QuoteResultsProps {
