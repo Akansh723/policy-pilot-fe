@@ -1,5 +1,7 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
+
+console.log(API_BASE_URL, "akansh saxena checking 2", process.env.REACT_APP_API_BASE_URL)
 export const API_ENDPOINTS = {
   HEALTH: '/health',
   VEHICLE: '/vehicle',
