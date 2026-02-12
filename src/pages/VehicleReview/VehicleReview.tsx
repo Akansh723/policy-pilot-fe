@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../../components/shared/Header';
 import { Button } from '../../components/shared/Button';
+import { Loader } from '../../components/shared/Loader';
 import { VehicleData } from '../../App';
 import { getPolicySuggestions, PolicySuggestion } from '../../api/policyApi';
 import styles from './VehicleReview.module.css';
@@ -35,7 +36,9 @@ export const VehicleReview: React.FC<VehicleReviewProps> = ({ vehicleData, onCon
   };
 
   return (
-    <div className={styles.container}>
+    <>
+      {isLoading && <Loader />}
+      <div className={styles.container}>
       <Header title="Review Details" onBack={onEdit} />
 
       <main className={styles.main}>
@@ -108,5 +111,6 @@ export const VehicleReview: React.FC<VehicleReviewProps> = ({ vehicleData, onCon
         </Button>
       </footer>
     </div>
+    </>
   );
 };

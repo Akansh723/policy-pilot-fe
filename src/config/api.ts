@@ -14,6 +14,7 @@ export const API_ENDPOINTS = {
     SUGGEST: '/policies/suggest',
     BUY: '/policy/buy',
     MY: '/policy/my',
+    PURCHASE: '/policy/purchase',
   },
 } as const;
 

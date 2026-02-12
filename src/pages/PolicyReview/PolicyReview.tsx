@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../../components/shared/Header';
 import { Button } from '../../components/shared/Button';
+import { Loader } from '../../components/shared/Loader';
 import { PolicySuggestion } from '../../api/policyApi';
 import { purchasePolicy } from '../../api/userApi';
 import { VehicleData } from '../../App';
@@ -68,7 +69,9 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <>
+      {loading && <Loader />}
+      <div className={styles.container}>
       <Header title="Review & Sign" onBack={onBack} />
       
       <main className={styles.main}>
@@ -153,5 +156,6 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
         </p>
       </footer>
     </div>
+    </>
   );
 };

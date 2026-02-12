@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/shared/Header';
 import { Button } from '../../components/shared/Button';
+import { Loader } from '../../components/shared/Loader';
 import { VehicleData } from '../../App';
 import { getByLicensePlate } from '../../api/vehicleApi';
 import styles from './VehicleInfo.module.css';
@@ -57,6 +58,7 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
 
   return (
     <>
+      {isSearching && <Loader />}
       <Header title="Get a Quote" onBack={() => navigate('/')} />
 
       <main className={styles.main}>

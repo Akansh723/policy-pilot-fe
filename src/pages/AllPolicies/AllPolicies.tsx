@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Loader } from '../../components/shared/Loader';
 import { getMyPolicies, MyPolicy } from '../../api/policyApi';
 import styles from './AllPolicies.module.css';
 
@@ -43,7 +44,9 @@ export const AllPolicies: React.FC = () => {
   });
 
   return (
-    <div className={styles.container}>
+    <>
+      {loading && <Loader />}
+      <div className={styles.container}>
       <header className={styles.header}>
         <button className={styles.backBtn} onClick={() => navigate('/')}>
           <span className="material-symbols-outlined">arrow_back</span>
@@ -151,5 +154,6 @@ export const AllPolicies: React.FC = () => {
         <span className="material-symbols-outlined">add</span>
       </button>
     </div>
+    </>
   );
 };

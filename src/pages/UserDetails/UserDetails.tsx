@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../../components/shared/Header';
 import { Button } from '../../components/shared/Button';
+import { Loader } from '../../components/shared/Loader';
 import { updateProfile } from '../../api/userApi';
 import styles from './UserDetails.module.css';
 
@@ -48,7 +49,9 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <>
+      {loading && <Loader />}
+      <div className={styles.container}>
       <Header title="Profile Setup" />
 
       <main className={styles.main}>
@@ -166,5 +169,6 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
         </Button>
       </footer>
     </div>
+    </>
   );
 };

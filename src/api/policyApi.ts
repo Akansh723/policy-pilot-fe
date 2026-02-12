@@ -1,5 +1,5 @@
 import { get } from './httpClient';
-import { API_ENDPOINTS } from '../config/api';
+import API_BASE_URL, { API_ENDPOINTS } from '../config/api';
 
 export interface PolicyAddon {
   addonId: string;
@@ -83,7 +83,7 @@ export interface MyPolicy {
 }
 
 export const getMyPolicies = async (token: string): Promise<MyPolicy[]> => {
-  const response = await fetch(`http://localhost:3001/policy/my`, {
+  const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.POLICY.MY}`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   const data = await response.json();

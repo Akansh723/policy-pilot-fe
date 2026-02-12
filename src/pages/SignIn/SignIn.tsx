@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../../components/shared/Button';
+import { Loader } from '../../components/shared/Loader';
 import { requestOtp, verifyOtp } from '../../api/authApi';
 import styles from './SignIn.module.css';
 
@@ -90,7 +91,9 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
   };
 
   return (
-    <div className={isStandalone ? styles.standaloneContainer : styles.container}>
+    <>
+      {isLoading && <Loader />}
+      <div className={isStandalone ? styles.standaloneContainer : styles.container}>
       {isStandalone ? (
         <header className={styles.standaloneHeader}>
           <button className={styles.closeButton} onClick={onBack}>×</button>
@@ -260,5 +263,6 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
         )}
       </footer>
     </div>
+    </>
   );
 };

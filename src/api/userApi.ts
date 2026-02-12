@@ -1,5 +1,5 @@
 import { put, post } from './httpClient';
-import { API_ENDPOINTS } from '../config/api';
+import API_BASE_URL, { API_ENDPOINTS } from '../config/api';
 
 interface UpdateProfileData {
   name: string;
@@ -24,7 +24,7 @@ interface UserProfile {
 }
 
 export const getUserProfile = async (token: string): Promise<UserProfile> => {
-  const response = await fetch('http://localhost:3001/user/profile', {
+  const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.USER.PROFILE}`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   const data = await response.json();
@@ -64,7 +64,7 @@ interface PurchaseResponse {
 }
 
 export const purchasePolicy = async (data: PurchasePolicyData, token: string): Promise<PurchaseResponse> => {
-  const response = await post<PurchaseResponse>('/policy/purchase', data, token);
+  const response = await post<PurchaseResponse>(API_ENDPOINTS.POLICY.PURCHASE, data, token);
   if (!response.success || !response.data) {
     throw new Error(response.message);
   }

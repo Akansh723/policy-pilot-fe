@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Loader } from '../../components/shared/Loader';
 import { getMyPolicies, MyPolicy } from '../../api/policyApi';
 import { getUserProfile } from '../../api/userApi';
 import styles from './Dashboard.module.css';
@@ -52,7 +53,9 @@ export const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <>
+      {loading && <Loader />}
+      <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.brand}>
           <div className={styles.brandIcon}>
@@ -192,5 +195,6 @@ export const Dashboard: React.FC = () => {
         </section>
       </main>
     </div>
+    </>
   );
 };
