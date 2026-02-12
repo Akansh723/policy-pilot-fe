@@ -5,7 +5,7 @@ interface ApiResponse<T> {
   message: string;
   data?: T;
 }
-console.log(API_BASE_URL, "akansh saxena checking")
+
 export const get = async <T>(endpoint: string): Promise<ApiResponse<T>> => {
   const response = await fetch(`${API_BASE_URL}${endpoint}`);
   if (!response.ok) {
