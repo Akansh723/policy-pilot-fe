@@ -48,23 +48,24 @@ export const AllPolicies: React.FC = () => {
       {loading && <Loader />}
       <div className={styles.container}>
       <header className={styles.header}>
-        <button className={styles.backBtn} onClick={() => navigate('/')}>
-          <span className="material-symbols-outlined">arrow_back</span>
+        <button className={styles.backBtn} onClick={() => navigate('/')} aria-label="Go back to dashboard">
+          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
         </button>
         <div className={styles.headerTop}>
           <h1 className={styles.title}>My Policies</h1>
-          <div className={styles.avatar}>
+          <div className={styles.avatar} aria-hidden="true">
             <span className="material-symbols-outlined">person</span>
           </div>
         </div>
         <div className={styles.searchBox}>
-          <span className="material-symbols-outlined" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }}>search</span>
+          <span className="material-symbols-outlined" aria-hidden="true" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }}>search</span>
           <input 
             type="text" 
             placeholder="Search your vehicles..." 
             className={styles.searchInput}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search your vehicles"
           />
         </div>
       </header>
@@ -84,9 +85,9 @@ export const AllPolicies: React.FC = () => {
               const statusInfo = getStatusDisplay(policy.status);
               return (
                 <div key={policy._id} className={`${styles.policyCard} ${isExpanded ? styles.expanded : ''}`}>
-                  <div className={styles.cardHeader} onClick={() => setExpandedId(isExpanded ? null : policy._id)}>
+                  <div className={styles.cardHeader} onClick={() => setExpandedId(isExpanded ? null : policy._id)} role="button" aria-expanded={isExpanded} tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedId(isExpanded ? null : policy._id); } }}>
                     <div className={styles.vehicleInfo}>
-                      <div className={styles.vehicleIcon}>
+                      <div className={styles.vehicleIcon} aria-hidden="true">
                         <span className="material-symbols-outlined">electric_car</span>
                       </div>
                       <div>
@@ -98,7 +99,7 @@ export const AllPolicies: React.FC = () => {
                       <span className={styles.statusBadge} style={{ backgroundColor: statusInfo.color }}>
                         {statusInfo.label}
                       </span>
-                      <span className={`material-symbols-outlined ${styles.chevron} ${isExpanded ? styles.chevronExpanded : ''}`}>chevron_right</span>
+                      <span className={`material-symbols-outlined ${styles.chevron} ${isExpanded ? styles.chevronExpanded : ''}`} aria-hidden="true">chevron_right</span>
                     </div>
                   </div>
 
@@ -150,8 +151,8 @@ export const AllPolicies: React.FC = () => {
         )}
       </main>
 
-      <button className={styles.fab} onClick={() => navigate('/get-a-quote')}>
-        <span className="material-symbols-outlined">add</span>
+      <button className={styles.fab} onClick={() => navigate('/get-a-quote')} aria-label="Get a new quote">
+        <span className="material-symbols-outlined" aria-hidden="true">add</span>
       </button>
     </div>
     </>

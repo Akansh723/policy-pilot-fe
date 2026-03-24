@@ -11,9 +11,9 @@ export const Header: React.FC<HeaderProps> = ({ title, onBack }) => {
     <header className={styles.header}>
       <div className={styles.left}>
         {onBack && (
-          <div className={styles.backButton} onClick={onBack}>
-            <span className={styles.backIcon}>‹</span>
-          </div>
+          <button className={styles.backButton} onClick={onBack} aria-label="Go back">
+            <span className={styles.backIcon} aria-hidden="true">‹</span>
+          </button>
         )}
       </div>
       <h2 className={styles.title}>{title}</h2>

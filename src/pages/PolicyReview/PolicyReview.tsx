@@ -80,7 +80,7 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
             <span className={styles.stepText}>STEP 4 OF 4</span>
             <span className={styles.finalText}>Final Review</span>
           </div>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100} aria-label="Step 4 of 4">
             <div className={styles.progressFill} style={{ width: '100%' }} />
           </div>
         </div>
@@ -99,11 +99,11 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
             </div>
             <div className={styles.details}>
               <div className={styles.detailRow}>
-                <span className={styles.icon}>🚗</span>
+                <span className={styles.icon} aria-hidden="true">🚗</span>
                 <p className={styles.detailText}>{vehicleData.purchaseYear} {vehicleData.company} {vehicleData.carName} • {vehicleData.licensePlate}</p>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.icon}>🛡️</span>
+                <span className={styles.icon} aria-hidden="true">🛡️</span>
                 <div>
                   <p className={styles.detailText}>Base Premium: ₹{policyData.bestPolicy.finalPremium.toLocaleString()}</p>
                   {selectedAddons.length > 0 && (
@@ -138,21 +138,21 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
         </div>
 
         <div className={styles.helpSection}>
-          <button className={styles.helpButton}>
-            <span className={styles.helpIcon}>🎧</span>
+          <button className={styles.helpButton} aria-label="Contact support agent">
+            <span className={styles.helpIcon} aria-hidden="true">🎧</span>
             Need help? Talk to an agent
           </button>
         </div>
       </main>
 
       <footer className={styles.footer}>
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={styles.error} role="alert">{error}</p>}
         <Button onClick={handleProceed} disabled={!agreed || loading}>
           {loading ? 'Processing...' : 'Proceed to Payment'}
           <span>→</span>
         </Button>
         <p className={styles.secureText}>
-          <span>🔒</span> Secure 256-bit Connection
+          <span aria-hidden="true">🔒</span> Secure 256-bit Connection
         </p>
       </footer>
     </div>

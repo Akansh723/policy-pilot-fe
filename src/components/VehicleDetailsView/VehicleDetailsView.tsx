@@ -15,20 +15,20 @@ export const VehicleDetailsView: React.FC<VehicleDetailsViewProps> = ({ details,
         <p className={styles.subtitle}>Review your vehicle information below.</p>
       </div>
       
-      <div className={styles.details}>
-        <div className={styles.row}>
+      <div className={styles.details} role="list" aria-label="Vehicle details">
+        <div className={styles.row} role="listitem">
           <span className={styles.label}>Vehicle Number</span>
           <span className={styles.value}>{details.vehicleNumber}</span>
         </div>
-        <div className={styles.row}>
+        <div className={styles.row} role="listitem">
           <span className={styles.label}>Manufacturer</span>
           <span className={styles.value}>{details.manufacturer}</span>
         </div>
-        <div className={styles.row}>
+        <div className={styles.row} role="listitem">
           <span className={styles.label}>Model</span>
           <span className={styles.value}>{details.model}</span>
         </div>
-        <div className={styles.row}>
+        <div className={styles.row} role="listitem">
           <span className={styles.label}>Year</span>
           <span className={styles.value}>{details.year}</span>
         </div>

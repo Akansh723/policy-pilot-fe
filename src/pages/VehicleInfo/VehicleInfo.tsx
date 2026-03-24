@@ -67,7 +67,7 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
             <span className={styles.stepText}>STEP 1 OF 4</span>
             <span className={styles.finalText}>Vehicle Details</span>
           </div>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} role="progressbar" aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} aria-label="Step 1 of 4">
             <div className={styles.progressFill} style={{ width: '25%' }} />
           </div>
         </div>
@@ -97,7 +97,7 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
             >
               {isSearching ? 'Searching...' : 'Find My Car'}
             </Button>
-            {searchError && <p className={styles.error}>{searchError}</p>}
+            {searchError && <p className={styles.error} role="alert">{searchError}</p>}
           </div>
         </div>
 
@@ -217,7 +217,7 @@ export const VehicleInfo: React.FC<VehicleInfoProps> = ({ onNext, initialData })
 
         <div className={styles.vehicleUseSection}>
           <p className={styles.vehicleUseTitle}>Primary vehicle use</p>
-          <div className={styles.radioGroup}>
+          <div className={styles.radioGroup} role="radiogroup" aria-label="Primary vehicle use">
             <label className={usageType === 'personal' ? styles.radioOptionActive : styles.radioOption}>
               <div className={styles.radioContent}>
                 <span className={styles.radioLabel}>Personal</span>

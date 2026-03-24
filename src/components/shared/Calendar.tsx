@@ -39,21 +39,21 @@ export const Calendar: React.FC<CalendarProps> = ({ selectedDate, onSelect, onCl
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
+    <div className={styles.overlay} onClick={onClose} role="dialog" aria-modal="true" aria-label="Date picker">
       <div className={styles.calendar} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <button className={styles.navButton} onClick={handlePrevMonth}>‹</button>
-          <h3 className={styles.monthYear}>
+          <button className={styles.navButton} onClick={handlePrevMonth} aria-label="Previous month">‹</button>
+          <h3 className={styles.monthYear} aria-live="polite">
             {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
           </h3>
-          <button className={styles.navButton} onClick={handleNextMonth}>›</button>
+          <button className={styles.navButton} onClick={handleNextMonth} aria-label="Next month">›</button>
         </div>
-        <div className={styles.weekdays}>
+        <div className={styles.weekdays} role="row">
           {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-            <div key={day} className={styles.weekday}>{day}</div>
+            <div key={day} className={styles.weekday} role="columnheader" aria-label={day}>{day}</div>
           ))}
         </div>
-        <div className={styles.days}>
+        <div className={styles.days} role="grid">
           {blanks.map(i => <div key={`blank-${i}`} className={styles.blank} />)}
           {days.map(day => {
             const isSelected = selectedDate?.getDate() === day && 
@@ -64,6 +64,8 @@ export const Calendar: React.FC<CalendarProps> = ({ selectedDate, onSelect, onCl
                 key={day}
                 className={isSelected ? styles.daySelected : styles.day}
                 onClick={() => handleDateClick(day)}
+                aria-label={`${monthNames[currentMonth.getMonth()]} ${day}, ${currentMonth.getFullYear()}`}
+                aria-selected={isSelected}
               >
                 {day}
               </button>

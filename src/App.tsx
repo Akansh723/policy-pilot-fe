@@ -153,7 +153,7 @@ function QuoteFlow() {
         path="/user-details"
         element={
           <UserDetails
-            onNext={() => navigate(purchaseData ? '/policy-review' : '/registration')}
+            onNext={() => navigate(purchaseData ? '/policy-review' : '/')}
           />
         }
       />
@@ -161,7 +161,7 @@ function QuoteFlow() {
         path="/registration"
         element={
           <Registration
-            onNext={() => alert('Registration Complete!')}
+            onNext={() => navigate('/')}
             onBack={() => navigate('/sign-in')}
           />
         }
@@ -173,7 +173,8 @@ function QuoteFlow() {
 function App() {
   return (
     <BrowserRouter>
-      <div className="app">
+      <div className="app" role="application">
+        <a href="#main-content" className="sr-only">Skip to main content</a>
         <QuoteFlow />
       </div>
     </BrowserRouter>

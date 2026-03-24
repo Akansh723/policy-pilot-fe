@@ -29,21 +29,21 @@ export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.headerBrand}>
-            <div className={styles.headerLogo}>
+            <div className={styles.headerLogo} aria-hidden="true">
               <span className="material-symbols-outlined">auto_awesome</span>
             </div>
             <span className={styles.headerBrandText}>PolicyPilot</span>
           </div>
-          <button className={styles.headerButton} onClick={() => window.location.href = '/sign-in'}>
+          <button className={styles.headerButton} onClick={() => window.location.href = '/sign-in'} aria-label="Sign in to your account">
             Sign In
           </button>
         </div>
       </header>
 
-      <section className={styles.hero}>
+      <section className={styles.hero} aria-labelledby="hero-title">
         <div className={styles.heroContent}>
           <span className={styles.badge}>Premium Coverage</span>
-          <h1 className={styles.heroTitle}>
+          <h1 className={styles.heroTitle} id="hero-title">
             Insurance for the <span className={styles.highlight}>Modern</span> Driver
           </h1>
           <p className={styles.heroSubtitle}>
@@ -60,9 +60,9 @@ export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
         </div>
       </section>
 
-      <section className={styles.perks}>
-        <h2 className={styles.sectionTitle}>
-          <span className={styles.titleLine} />
+      <section className={styles.perks} aria-labelledby="perks-title">
+        <h2 className={styles.sectionTitle} id="perks-title">
+          <span className={styles.titleLine} aria-hidden="true" />
           Why Choose Us?
         </h2>
         <div className={styles.perksGrid}>
@@ -75,7 +75,7 @@ export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
         </div>
       </section>
 
-      <section className={styles.vision}>
+      <section className={styles.vision} aria-labelledby="vision-label">
         <h3 className={styles.visionLabel}>Our Vision</h3>
         <p className={styles.visionText}>
           We believe insurance should be <span className={styles.visionBold}>transparent, efficient, and mobile-first.</span>
@@ -83,20 +83,20 @@ export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
         <p className={styles.visionDesc}>
           By leveraging real-time data and sophisticated AI, we offer coverage that adapts to you, providing peace of mind without the legacy complexities of traditional firms.
         </p>
-        <a href="#" className={styles.visionLink}>
+        <a href="#" className={styles.visionLink} aria-label="Learn more about our mission">
           Learn more about our mission →
         </a>
       </section>
 
-      <footer className={styles.footer}>
+      <footer className={styles.footer} role="contentinfo">
         <div className={styles.footerContent}>
           <div className={styles.footerBrand}>
-            <div className={styles.footerLogo}>
+            <div className={styles.footerLogo} aria-hidden="true">
               <span className="material-symbols-outlined">auto_awesome</span>
             </div>
             <span className={styles.footerBrandText}>PolicyPilot</span>
           </div>
-          <div className={styles.footerLinks}>
+          <nav className={styles.footerLinks} aria-label="Product links">
             <div className={styles.footerColumn}>
               <h4 className={styles.footerColumnTitle}>Product</h4>
               <ul className={styles.footerList}>
@@ -115,7 +115,7 @@ export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
                 <li><a href="#">Compliance</a></li>
               </ul>
             </div>
-          </div>
+          </nav>
           <p className={styles.footerCopyright}>
             © 2024 PolicyPilot Insurance Services LLC. All rights reserved.
           </p>
@@ -123,13 +123,13 @@ export const Home: React.FC<HomeProps> = ({ onGetQuote }) => {
       </footer>
 
       {showFloating && (
-        <div className={styles.floatingBar}>
+        <div className={styles.floatingBar} role="complementary" aria-label="Quick quote">
           <div className={styles.floatingContent}>
             <div className={styles.floatingPrice}>
               <span className={styles.floatingLabel}>Starting at</span>
               <span className={styles.floatingAmount}>₹5,000/yr</span>
             </div>
-            <button className={styles.floatingButton} onClick={onGetQuote}>
+            <button className={styles.floatingButton} onClick={onGetQuote} aria-label="Get a quote starting at ₹5,000 per year">
               Get Quote
             </button>
           </div>

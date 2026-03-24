@@ -14,8 +14,8 @@ export const DriverDetails: React.FC<DriverDetailsProps> = ({ onNext, onBack }) 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.backButton} onClick={onBack}>
-          <span className={styles.backIcon}>‹</span>
+        <div className={styles.backButton} onClick={onBack} role="button" tabIndex={0} aria-label="Go back" onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBack(); } }}>
+          <span className={styles.backIcon} aria-hidden="true">‹</span>
         </div>
         <h2 className={styles.headerTitle}>Car Insurance</h2>
       </header>
@@ -26,7 +26,7 @@ export const DriverDetails: React.FC<DriverDetailsProps> = ({ onNext, onBack }) 
             <p className={styles.stepText}>STEP 2 OF 4</p>
             <p className={styles.progressPercent}>50%</p>
           </div>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} role="progressbar" aria-valuenow={50} aria-valuemin={0} aria-valuemax={100} aria-label="Step 2 of 4">
             <div className={styles.progressFill} style={{ width: '50%' }} />
           </div>
         </div>
@@ -53,30 +53,33 @@ export const DriverDetails: React.FC<DriverDetailsProps> = ({ onNext, onBack }) 
           </div>
 
           <div className={styles.field}>
-            <p className={styles.labelText}>Date of Birth</p>
+            <label className={styles.labelText} id="dob-label">Date of Birth</label>
             <div className={styles.dateInputWrapper}>
               <input
                 className={styles.dateInput}
                 type="text"
                 readOnly
                 value={dob}
+                aria-labelledby="dob-label"
               />
-              <span className={styles.calendarIcon}>📅</span>
+              <span className={styles.calendarIcon} aria-hidden="true">📅</span>
             </div>
           </div>
 
           <div className={styles.field}>
-            <p className={styles.labelText}>Any accidents in the last 3 years?</p>
-            <div className={styles.toggleGroup}>
+            <p className={styles.labelText} id="accidents-label">Any accidents in the last 3 years?</p>
+            <div className={styles.toggleGroup} role="group" aria-labelledby="accidents-label">
               <button
                 className={accidents === 'no' ? styles.toggleButtonActive : styles.toggleButton}
                 onClick={() => setAccidents('no')}
+                aria-pressed={accidents === 'no'}
               >
                 No
               </button>
               <button
                 className={accidents === 'yes' ? styles.toggleButtonActive : styles.toggleButton}
                 onClick={() => setAccidents('yes')}
+                aria-pressed={accidents === 'yes'}
               >
                 Yes
               </button>

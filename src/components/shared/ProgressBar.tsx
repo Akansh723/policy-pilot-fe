@@ -15,7 +15,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ step, totalSteps, perc
         <p className={styles.stepText}>{label || `STEP ${step} OF ${totalSteps}`}</p>
         <p className={styles.percentage}>{percentage}%</p>
       </div>
-      <div className={styles.bar}>
+      <div className={styles.bar} role="progressbar" aria-valuenow={percentage} aria-valuemin={0} aria-valuemax={100} aria-label={label || `Step ${step} of ${totalSteps}`}>
         <div className={styles.fill} style={{ width: `${percentage}%` }} />
       </div>
     </div>

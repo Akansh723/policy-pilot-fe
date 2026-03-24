@@ -23,8 +23,8 @@ export const PurchaseSuccess: React.FC<PurchaseSuccessProps> = ({ vehicleData, p
         </div>
       </header>
 
-      <main className={styles.main}>
-        <div className={styles.successIcon}>
+      <main className={styles.main} aria-labelledby="success-title">
+        <div className={styles.successIcon} aria-hidden="true">
           <div className={styles.iconOuter}>
             <div className={styles.iconInner}>
               <span className="material-symbols-outlined">check</span>
@@ -33,7 +33,7 @@ export const PurchaseSuccess: React.FC<PurchaseSuccessProps> = ({ vehicleData, p
         </div>
 
         <div className={styles.titleSection}>
-          <h1 className={styles.title}>Purchase Successful!</h1>
+          <h1 className={styles.title} id="success-title">Purchase Successful!</h1>
           <p className={styles.subtitle}>
             We are reviewing your policy and will update you within 48 hours.
           </p>
@@ -45,13 +45,13 @@ export const PurchaseSuccess: React.FC<PurchaseSuccessProps> = ({ vehicleData, p
               <p className={styles.policyLabel}>Policy Number</p>
               <p className={styles.policyNumber}>{purchaseId}</p>
             </div>
-            <span className={styles.verifiedIcon}>
+            <span className={styles.verifiedIcon} aria-hidden="true">
               <span className="material-symbols-outlined">verified</span>
             </span>
           </div>
           <div className={styles.divider} />
           <div className={styles.vehicleInfo}>
-            <div className={styles.vehicleIcon}>
+            <div className={styles.vehicleIcon} aria-hidden="true">
               <span className="material-symbols-outlined">directions_car</span>
             </div>
             <div>
@@ -63,7 +63,7 @@ export const PurchaseSuccess: React.FC<PurchaseSuccessProps> = ({ vehicleData, p
         </div>
 
         <div className={styles.infoBox}>
-          <span className={styles.infoIcon}>
+          <span className={styles.infoIcon} aria-hidden="true">
             <span className="material-symbols-outlined">info</span>
           </span>
           <p className={styles.infoText}>
@@ -78,7 +78,7 @@ export const PurchaseSuccess: React.FC<PurchaseSuccessProps> = ({ vehicleData, p
         </div>
       </main>
 
-      <div className={styles.gradient} />
+      <div className={styles.gradient} aria-hidden="true" />
     </div>
   );
 };

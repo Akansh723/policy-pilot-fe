@@ -42,7 +42,7 @@ export const QuoteResults: React.FC<QuoteResultsProps> = ({ policyData, initialS
             <span className={styles.stepText}>STEP 3 OF 4</span>
             <span className={styles.finalText}>Quote Details</span>
           </div>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} role="progressbar" aria-valuenow={75} aria-valuemin={0} aria-valuemax={100} aria-label="Step 3 of 4">
             <div className={styles.progressFill} style={{ width: '75%' }} />
           </div>
         </div>
@@ -52,7 +52,7 @@ export const QuoteResults: React.FC<QuoteResultsProps> = ({ policyData, initialS
           <p className={styles.subtitle}>Based on your driving profile</p>
         </div>
 
-        <div className={styles.premiumCard}>
+        <div className={styles.premiumCard} aria-label={`Total premium: ₹${totalPrice.toLocaleString()} per year`}>
           <div className={styles.premiumBg1} />
           <div className={styles.premiumBg2} />
           <p className={styles.premiumAmount}>
@@ -68,7 +68,7 @@ export const QuoteResults: React.FC<QuoteResultsProps> = ({ policyData, initialS
               {availableAddons.map(addon => (
                 <div key={addon.addonId} className={styles.addonItem}>
                   <div className={styles.addonContent}>
-                    <div className={styles.addonIcon}>🔧</div>
+                    <div className={styles.addonIcon} aria-hidden="true">🔧</div>
                     <div>
                       <p className={styles.addonTitle}>{addon.name}</p>
                       <p className={styles.addonDesc}>{addon.code}</p>
@@ -78,7 +78,8 @@ export const QuoteResults: React.FC<QuoteResultsProps> = ({ policyData, initialS
                     <span className={styles.addonPrice}>+₹{addon.price}</span>
                     <Toggle 
                       checked={selectedAddons.includes(addon.addonId)} 
-                      onChange={() => toggleAddon(addon.addonId)} 
+                      onChange={() => toggleAddon(addon.addonId)}
+                      label={`Toggle ${addon.name} add-on`}
                     />
                   </div>
                 </div>

@@ -58,30 +58,30 @@ export const Dashboard: React.FC = () => {
       <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.brand}>
-          <div className={styles.brandIcon}>
+          <div className={styles.brandIcon} aria-hidden="true">
             <span className="material-symbols-outlined">auto_awesome</span>
           </div>
           <span className={styles.brandText}>PolicyPilot</span>
         </div>
         <div className={styles.headerActions}>
-          <button className={styles.notificationBtn}>
-            <span className="material-symbols-outlined">notifications</span>
+          <button className={styles.notificationBtn} aria-label="Notifications">
+            <span className="material-symbols-outlined" aria-hidden="true">notifications</span>
             <span className={styles.notificationDot} />
           </button>
-          <button className={styles.logoutBtn} onClick={handleLogout}>
-            <span className="material-symbols-outlined">logout</span>
+          <button className={styles.logoutBtn} onClick={handleLogout} aria-label="Log out">
+            <span className="material-symbols-outlined" aria-hidden="true">logout</span>
           </button>
         </div>
       </header>
 
-      <main className={styles.main}>
+      <main className={styles.main} id="main-content">
         <div className={styles.greeting}>
           <h1 className={styles.greetingTitle}>Hello, {userName}!</h1>
           <p className={styles.greetingText}>Everything looks good today.</p>
         </div>
 
         {latestPolicy && (
-          <section className={styles.policyCard}>
+          <section className={styles.policyCard} aria-label="Latest policy">
             <div className={styles.policyGradient} />
             <div className={styles.policyContent}>
               {loading ? (
@@ -96,7 +96,7 @@ export const Dashboard: React.FC = () => {
                       <h2 className={styles.policyTitle}>{latestPolicy.vehicleId.company} {latestPolicy.vehicleId.carName}</h2>
                       <p className={styles.policyId}>ID: {latestPolicy._id.slice(-10)}</p>
                     </div>
-                    <span className={styles.carIcon}>
+                    <span className={styles.carIcon} aria-hidden="true">
                       <span className="material-symbols-outlined">electric_car</span>
                     </span>
                   </div>
@@ -116,10 +116,10 @@ export const Dashboard: React.FC = () => {
           </section>
         )}
 
-        <section className={styles.getQuoteSection}>
+        <section className={styles.getQuoteSection} aria-label="Get a new quote">
           <button className={styles.getQuoteBtn} onClick={() => navigate('/get-a-quote')}>
             <div className={styles.getQuoteContent}>
-              <div className={styles.getQuoteIcon}>
+              <div className={styles.getQuoteIcon} aria-hidden="true">
                 <span className="material-symbols-outlined">add_circle</span>
               </div>
               <div className={styles.getQuoteText}>
@@ -127,14 +127,14 @@ export const Dashboard: React.FC = () => {
                 <p className={styles.getQuoteDesc}>Add a vehicle to your policy in minutes</p>
               </div>
             </div>
-            <span className={styles.chevron}>
+            <span className={styles.chevron} aria-hidden="true">
               <span className="material-symbols-outlined">chevron_right</span>
             </span>
           </button>
         </section>
 
-        <section className={styles.quickActions}>
-          <h3 className={styles.sectionTitle}>Quick Actions</h3>
+        <section className={styles.quickActions} aria-labelledby="quick-actions-title">
+          <h3 className={styles.sectionTitle} id="quick-actions-title">Quick Actions</h3>
           <div className={styles.actionsGrid}>
             <button className={styles.actionCard}>
               <div className={styles.actionIcon}>
@@ -163,9 +163,9 @@ export const Dashboard: React.FC = () => {
           </div>
         </section>
 
-        <section className={styles.newsSection}>
+        <section className={styles.newsSection} aria-labelledby="news-title">
           <div className={styles.newsHeader}>
-            <h3 className={styles.sectionTitle}>News & Tips</h3>
+            <h3 className={styles.sectionTitle} id="news-title">News & Tips</h3>
             <button className={styles.seeAllBtn}>See All</button>
           </div>
           <div className={styles.newsScroll}>

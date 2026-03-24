@@ -48,7 +48,7 @@ export const ManualEntryForm: React.FC<ManualEntryFormProps> = ({ onSubmit, onBa
         <p className={styles.subtitle}>Provide your vehicle information manually.</p>
       </div>
       
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form} aria-label="Vehicle details form">
         <div className={styles.field}>
           <Input
             label="Vehicle Number"

@@ -65,29 +65,32 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
 
         <div className={styles.form}>
           <div className={styles.field}>
-            <label className={styles.label}>Full Name</label>
+            <label className={styles.label} htmlFor="ud-fullname">Full Name</label>
             <div className={styles.inputWrapper}>
               <input
+                id="ud-fullname"
                 className={styles.input}
                 placeholder="John Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <span className={styles.inputIcon}>👤</span>
+              <span className={styles.inputIcon} aria-hidden="true">👤</span>
             </div>
           </div>
 
           <div className={styles.field}>
-            <label className={styles.label}>Age</label>
+            <label className={styles.label} htmlFor="ud-age">Age</label>
             <div className={styles.ageControl}>
               <button 
                 className={styles.ageButton} 
                 onClick={() => setAge(Math.max(16, age - 1))}
                 type="button"
+                aria-label="Decrease age"
               >
                 −
               </button>
               <input
+                id="ud-age"
                 className={styles.ageInput}
                 type="number"
                 min="16"
@@ -99,6 +102,7 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
                 className={styles.ageButton} 
                 onClick={() => setAge(Math.min(100, age + 1))}
                 type="button"
+                aria-label="Increase age"
               >
                 +
               </button>
@@ -108,7 +112,7 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
 
           <div className={styles.field}>
             <label className={styles.label}>Gender</label>
-            <div className={styles.genderControl}>
+            <div className={styles.genderControl} role="radiogroup" aria-label="Gender">
               <label className={gender === 'male' ? styles.genderOptionActive : styles.genderOption}>
                 <input
                   type="radio"
@@ -162,7 +166,7 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
       </main>
 
       <footer className={styles.footer}>
-        {error && <div className={styles.error}>{error}</div>}
+        {error && <div className={styles.error} role="alert">{error}</div>}
         <Button onClick={handleSubmit} disabled={!name || !agreed || loading}>
           {loading ? 'Saving...' : 'Complete Profile'}
           <span>✓</span>

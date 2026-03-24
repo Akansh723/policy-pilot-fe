@@ -22,7 +22,7 @@ export const Registration: React.FC<RegistrationProps> = ({ onNext, onBack }) =>
             <span className={styles.stepText}>ACCOUNT VERIFIED</span>
             <span className={styles.progressPercent}>STEP 1 OF 2</span>
           </div>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} role="progressbar" aria-valuenow={50} aria-valuemin={0} aria-valuemax={100}>
             <div className={styles.progressFill} style={{ width: '50%' }} />
           </div>
         </div>
@@ -37,32 +37,35 @@ export const Registration: React.FC<RegistrationProps> = ({ onNext, onBack }) =>
           <p className={styles.subtitle}>Please provide a few details to personalize your insurance experience.</p>
         </div>
 
-        <form className={styles.form}>
+        <form className={styles.form} aria-label="Profile setup form">
           <div className={styles.field}>
-            <label className={styles.label}>Full Name</label>
+            <label className={styles.label} htmlFor="reg-fullname">Full Name</label>
             <div className={styles.inputWrapper}>
               <input
+                id="reg-fullname"
                 className={styles.input}
                 placeholder="John Doe"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
               />
-              <span className={styles.inputIcon}>📛</span>
+              <span className={styles.inputIcon} aria-hidden="true">📛</span>
             </div>
           </div>
 
           <div className={styles.field}>
-            <label className={styles.label}>Age</label>
+            <label className={styles.label} htmlFor="reg-age">Age</label>
             <div className={styles.ageControl}>
-              <button type="button" className={styles.ageButton} onClick={() => setAge(Math.max(18, age - 1))}>
+              <button type="button" className={styles.ageButton} onClick={() => setAge(Math.max(18, age - 1))} aria-label="Decrease age">
                 −
               </button>
               <input
+                id="reg-age"
                 className={styles.ageInput}
                 value={age}
                 readOnly
+                aria-label="Age"
               />
-              <button type="button" className={styles.ageButton} onClick={() => setAge(Math.min(100, age + 1))}>
+              <button type="button" className={styles.ageButton} onClick={() => setAge(Math.min(100, age + 1))} aria-label="Increase age">
                 +
               </button>
             </div>
@@ -70,7 +73,7 @@ export const Registration: React.FC<RegistrationProps> = ({ onNext, onBack }) =>
 
           <div className={styles.field}>
             <label className={styles.label}>Gender</label>
-            <div className={styles.genderGroup}>
+            <div className={styles.genderGroup} role="radiogroup" aria-label="Gender">
               <label className={gender === 'male' ? styles.genderOptionActive : styles.genderOption}>
                 <input
                   type="radio"

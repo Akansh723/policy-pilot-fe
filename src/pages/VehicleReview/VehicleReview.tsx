@@ -47,7 +47,7 @@ export const VehicleReview: React.FC<VehicleReviewProps> = ({ vehicleData, onCon
             <span className={styles.stepText}>STEP 2 OF 4</span>
             <span className={styles.finalText}>Review Details</span>
           </div>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} role="progressbar" aria-valuenow={50} aria-valuemin={0} aria-valuemax={100} aria-label="Step 2 of 4">
             <div className={styles.progressFill} style={{ width: '50%' }} />
           </div>
         </div>
@@ -104,7 +104,7 @@ export const VehicleReview: React.FC<VehicleReviewProps> = ({ vehicleData, onCon
       </main>
 
       <footer className={styles.footer}>
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={styles.error} role="alert">{error}</p>}
         <Button variant="secondary" onClick={onEdit}>Edit Details</Button>
         <Button onClick={handleContinue} disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Continue to Quote'}

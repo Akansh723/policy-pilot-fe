@@ -33,7 +33,7 @@ export const VehicleNumberForm: React.FC<VehicleNumberFormProps> = ({
         <p className={styles.subtitle}>Enter your vehicle number to get started.</p>
       </div>
       
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form} aria-label="Vehicle number lookup">
         <div className={styles.field}>
           <Input
             label="What's your vehicle number?"
@@ -41,6 +41,7 @@ export const VehicleNumberForm: React.FC<VehicleNumberFormProps> = ({
             value={vehicleNumber}
             onChange={(e) => setVehicleNumber(e.target.value.toUpperCase())}
             error={error}
+            autoComplete="off"
           />
         </div>
         
@@ -48,6 +49,7 @@ export const VehicleNumberForm: React.FC<VehicleNumberFormProps> = ({
           type="button" 
           className={styles.manualLink}
           onClick={onManualEntry}
+          aria-label="Enter vehicle details manually instead of searching"
         >
           Enter details manually instead
         </button>

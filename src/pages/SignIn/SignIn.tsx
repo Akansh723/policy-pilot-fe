@@ -96,9 +96,9 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
       <div className={isStandalone ? styles.standaloneContainer : styles.container}>
       {isStandalone ? (
         <header className={styles.standaloneHeader}>
-          <button className={styles.closeButton} onClick={onBack}>×</button>
+          <button className={styles.closeButton} onClick={onBack} aria-label="Close">×</button>
           <div className={styles.brandBadge}>
-            <div className={styles.brandIcon}>
+            <div className={styles.brandIcon} aria-hidden="true">
               <span className="material-symbols-outlined">auto_awesome</span>
             </div>
             <span className={styles.brandText}>PolicyPilot</span>
@@ -107,7 +107,7 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
         </header>
       ) : (
         <header className={styles.header}>
-        <button className={styles.backButton} onClick={onBack}>
+        <button className={styles.backButton} onClick={onBack} aria-label="Go back">
           ←
         </button>
         <div className={styles.headerTitle}>
@@ -155,20 +155,22 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
           {!otpSent ? (
             <>
               <div className={styles.field}>
-                <label className={styles.label}>MOBILE NUMBER</label>
+                <label className={styles.label} htmlFor="mobile-input">MOBILE NUMBER</label>
                 <div className={styles.inputWrapper}>
                   <input
+                    id="mobile-input"
                     className={styles.input}
                     placeholder="9876543210"
                     type="tel"
                     maxLength={10}
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value.replace(/\D/g, ''))}
+                    autoComplete="tel"
                   />
                 </div>
               </div>
 
-              {error && <p className={styles.error}>{error}</p>}
+              {error && <p className={styles.error} role="alert">{error}</p>}
 
               {isStandalone ? (
                 <button className={styles.standaloneButton} onClick={handleSendCode} disabled={isLoading}>
@@ -184,9 +186,9 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
           ) : (
             <>
               <div className={styles.field}>
-                <label className={styles.label}>ENTER OTP</label>
+                <label className={styles.label} id="otp-label">ENTER OTP</label>
                 <p className={styles.otpHint}>Code sent to {mobile}</p>
-                <div className={styles.otpInputs}>
+                <div className={styles.otpInputs} role="group" aria-label="One-time password">
                   {otp.map((digit, index) => (
                     <input
                       key={index}
@@ -199,10 +201,11 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
                       onChange={(e) => handleOtpChange(index, e.target.value)}
                       onKeyDown={(e) => handleOtpKeyDown(index, e)}
                       onPaste={handleOtpPaste}
+                      aria-label={`Digit ${index + 1} of 6`}
                     />
                   ))}
                 </div>
-                {error && <p className={styles.errorSmall}>{error}</p>}
+                {error && <p className={styles.errorSmall} role="alert">{error}</p>}
               </div>
 
               {isStandalone ? (
@@ -229,11 +232,12 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
           </div>
 
           <div className={isStandalone ? styles.standaloneSocial : styles.socialButtons}>
-            <button className={styles.socialButton}>
-              <span className={styles.googleIcon}>G</span>
+            <button className={styles.socialButton} aria-label="Sign in with Google">
+              <span className={styles.googleIcon} aria-hidden="true">G</span>
               <span>Google</span>
             </button>
-            <button className={styles.socialButton}>
+            <button className={styles.socialButton} aria-label="Sign in with Apple">
+              <span></span>
               <span>Apple</span>
             </button>
           </div>
