@@ -1,4 +1,4 @@
-const API_BASE_URL = (window as any).ENV?.API_BASE_URL || process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+const API_BASE_URL = 'https://policy-pilot-api-157386566439.europe-west1.run.app';
 
 export const API_ENDPOINTS = {
   HEALTH: '/health',
