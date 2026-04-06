@@ -5,32 +5,29 @@ import { getMyPolicies, MyPolicy } from '../../api/policyApi';
 import { getUserProfile } from '../../api/userApi';
 import styles from './Dashboard.module.css';
 
-export const Dashboard: React.FC = () => {
+interface DashboardProps {
+  onLogout?: () => void;
+}
+
+export const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const [policies, setPolicies] = useState<MyPolicy[]>([]);
   const [userName, setUserName] = useState('User');
   const [loading, setLoading] = useState(true);
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userName');
-    navigate('/');
-    window.location.reload();
+    if (onLogout) onLogout();
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('authToken');
-        
-        if (token) {
-          const [policiesData, userProfile] = await Promise.all([
-            getMyPolicies(token),
-            getUserProfile(token)
-          ]);
-          setPolicies(policiesData);
-          setUserName(userProfile.name || 'User');
-        }
+        const [policiesData, userProfile] = await Promise.all([
+          getMyPolicies(),
+          getUserProfile()
+        ]);
+        setPolicies(policiesData);
+        setUserName(userProfile.name || 'User');
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateName, validateNumericString } from '../../utils/validation';
 import styles from './DriverDetails.module.css';
 
 interface DriverDetailsProps {
@@ -42,12 +43,13 @@ export const DriverDetails: React.FC<DriverDetailsProps> = ({ onNext, onBack }) 
               <p className={styles.labelText}>What's your zip code?</p>
               <input
                 className={styles.input}
-                type="number"
+                type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
                 placeholder="12345"
+                maxLength={6}
                 value={zipCode}
-                onChange={(e) => setZipCode(e.target.value)}
+                onChange={(e) => setZipCode(e.target.value.replace(/\D/g, ''))}
               />
             </label>
           </div>

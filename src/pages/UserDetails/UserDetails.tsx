@@ -3,6 +3,7 @@ import { Header } from '../../components/shared/Header';
 import { Button } from '../../components/shared/Button';
 import { Loader } from '../../components/shared/Loader';
 import { updateProfile } from '../../api/userApi';
+import { validateName, validateAge, sanitize } from '../../utils/validation';
 import styles from './UserDetails.module.css';
 
 interface UserDetailsProps {
@@ -18,12 +19,14 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    if (!name.trim()) {
-      setError('Name is required');
+    const nameCheck = validateName(name);
+    if (!nameCheck.valid) {
+      setError(nameCheck.error);
       return;
     }
-    if (age < 18 || age > 100) {
-      setError('Age must be between 18 and 100');
+    const ageCheck = validateAge(age);
+    if (!ageCheck.valid) {
+      setError(ageCheck.error);
       return;
     }
     if (!agreed) {
@@ -35,11 +38,7 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ onNext }) => {
     setError('');
 
     try {
-      const token = localStorage.getItem('authToken');
-      if (!token) throw new Error('Authentication required');
-      
-      await updateProfile({ name: name.trim(), age, gender }, token);
-      localStorage.setItem('userName', name.trim());
+      await updateProfile({ name: sanitize(name.trim()), age, gender });
       onNext();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update profile');

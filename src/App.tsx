@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Home } from './pages/Home';
 import { Dashboard } from './pages/Dashboard';
 import { AllPolicies } from './pages/AllPolicies';
@@ -12,6 +12,8 @@ import { UserDetails } from './pages/UserDetails';
 import { Registration } from './pages/Registration';
 import { PurchaseSuccess } from './pages/PurchaseSuccess';
 import { PolicySuggestion } from './api/policyApi';
+import { getUserProfile } from './api/userApi';
+import { logout } from './api/authApi';
 import './App.css';
 
 interface PurchaseData {
@@ -38,13 +40,29 @@ function QuoteFlow() {
   const navigate = useNavigate();
   const [vehicleData, setVehicleData] = useState<VehicleData | null>(null);
   const [policyData, setPolicyData] = useState<PolicySuggestion | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
   const [purchaseData, setPurchaseData] = useState<PurchaseData | null>(null);
   const [purchaseId, setPurchaseId] = useState<string>('');
 
+  useEffect(() => {
+    getUserProfile()
+      .then(() => setIsAuthenticated(true))
+      .catch(() => setIsAuthenticated(false))
+      .finally(() => setAuthChecked(true));
+  }, []);
+
+  const handleLogout = async () => {
+    try { await logout(); } catch {}
+    setIsAuthenticated(false);
+    navigate('/');
+  };
+
+  if (!authChecked) return null;
+
   return (
     <Routes>
-      <Route path="/" element={isAuthenticated ? <Dashboard /> : <Home onGetQuote={() => navigate('/get-a-quote')} />} />
+      <Route path="/" element={isAuthenticated ? <Dashboard onLogout={handleLogout} /> : <Home onGetQuote={() => navigate('/get-a-quote')} />} />
       <Route path="/policies" element={<AllPolicies />} />
       <Route
         path="/get-a-quote"
@@ -136,8 +154,7 @@ function QuoteFlow() {
         element={
           <SignIn
             totalPremium={purchaseData?.totalPremium}
-            onNext={(token, isNewUser) => {
-              localStorage.setItem('authToken', token);
+            onNext={(isNewUser) => {
               setIsAuthenticated(true);
               if (isNewUser) {
                 navigate('/user-details');

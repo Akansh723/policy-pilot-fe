@@ -14,11 +14,8 @@ export const AllPolicies: React.FC = () => {
   useEffect(() => {
     const fetchPolicies = async () => {
       try {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-          const data = await getMyPolicies(token);
-          setPolicies(data);
-        }
+        const data = await getMyPolicies();
+        setPolicies(data);
       } catch (error) {
         console.error('Failed to fetch policies:', error);
       } finally {

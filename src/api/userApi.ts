@@ -1,5 +1,5 @@
-import { put, post } from './httpClient';
-import API_BASE_URL, { API_ENDPOINTS } from '../config/api';
+import { put, post, get } from './httpClient';
+import { API_ENDPOINTS } from '../config/api';
 
 interface UpdateProfileData {
   name: string;
@@ -7,8 +7,8 @@ interface UpdateProfileData {
   gender: 'male' | 'female' | 'other';
 }
 
-export const updateProfile = async (data: UpdateProfileData, token: string): Promise<void> => {
-  const response = await put(API_ENDPOINTS.USER.PROFILE, data, token);
+export const updateProfile = async (data: UpdateProfileData): Promise<void> => {
+  const response = await put(API_ENDPOINTS.USER.PROFILE, data, true);
   if (!response.success) {
     throw new Error(response.message);
   }
@@ -23,15 +23,12 @@ interface UserProfile {
   createdAt?: string;
 }
 
-export const getUserProfile = async (token: string): Promise<UserProfile> => {
-  const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.USER.PROFILE}`, {
-    headers: { 'Authorization': `Bearer ${token}` }
-  });
-  const data = await response.json();
-  if (!data.success) {
-    throw new Error(data.message);
+export const getUserProfile = async (): Promise<UserProfile> => {
+  const response = await get<UserProfile>(API_ENDPOINTS.USER.PROFILE, true);
+  if (!response.success || !response.data) {
+    throw new Error(response.message);
   }
-  return data.data;
+  return response.data;
 };
 
 interface PurchasePolicyData {
@@ -63,8 +60,8 @@ interface PurchaseResponse {
   status: string;
 }
 
-export const purchasePolicy = async (data: PurchasePolicyData, token: string): Promise<PurchaseResponse> => {
-  const response = await post<PurchaseResponse>(API_ENDPOINTS.POLICY.PURCHASE, data, token);
+export const purchasePolicy = async (data: PurchasePolicyData): Promise<PurchaseResponse> => {
+  const response = await post<PurchaseResponse>(API_ENDPOINTS.POLICY.PURCHASE, data, true);
   if (!response.success || !response.data) {
     throw new Error(response.message);
   }

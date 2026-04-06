@@ -33,9 +33,6 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
     setError('');
 
     try {
-      const token = localStorage.getItem('authToken');
-      if (!token) throw new Error('Authentication required');
-
       const addonsPremium = policyData.bestPolicy.addons
         .filter(a => selectedAddons.includes(a.addonId))
         .reduce((sum, a) => sum + a.price, 0);
@@ -58,7 +55,7 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
         addons: selectedAddons,
         basePremium: policyData.bestPolicy.finalPremium,
         addonsPremium,
-      }, token);
+      });
 
       onNext(response.purchaseId);
     } catch (err) {

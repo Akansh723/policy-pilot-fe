@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Button } from '../../components/shared/Button';
 import { Loader } from '../../components/shared/Loader';
 import { requestOtp, verifyOtp } from '../../api/authApi';
+import { validateMobile, validateOtp } from '../../utils/validation';
 import styles from './SignIn.module.css';
 
 interface SignInProps {
-  onNext: (token: string, isNewUser: boolean) => void;
+  onNext: (isNewUser: boolean) => void;
   onBack: () => void;
   totalPremium?: number;
 }
@@ -20,8 +21,9 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
   const isStandalone = !totalPremium;
 
   const handleSendCode = async () => {
-    if (!mobile || mobile.length !== 10) {
-      setError('Please enter a valid 10-digit mobile number');
+    const mobileCheck = validateMobile(mobile);
+    if (!mobileCheck.valid) {
+      setError(mobileCheck.error);
       return;
     }
     setIsLoading(true);
@@ -48,16 +50,16 @@ export const SignIn: React.FC<SignInProps> = ({ onNext, onBack, totalPremium }) 
 
   const handleVerifyOtp = async () => {
     const otpString = otp.join('');
-    if (otpString.length !== 6) {
-      setError('Please enter a valid 6-digit OTP');
+    const otpCheck = validateOtp(otpString);
+    if (!otpCheck.valid) {
+      setError(otpCheck.error);
       return;
     }
     setIsLoading(true);
     setError('');
     try {
-      const { token, isNewUser } = await verifyOtp(mobile, otpString);
-      localStorage.setItem('authToken', token);
-      onNext(token, isNewUser);
+      const { isNewUser } = await verifyOtp(mobile, otpString);
+      onNext(isNewUser);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Invalid OTP');
     } finally {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from '../Input/Input';
+import { validateVehiclePlate } from '../../utils/validation';
 import styles from './VehicleNumberForm.module.css';
 
 interface VehicleNumberFormProps {
@@ -18,8 +19,9 @@ export const VehicleNumberForm: React.FC<VehicleNumberFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!vehicleNumber.trim()) {
-      setError('Vehicle number is required');
+    const plateCheck = validateVehiclePlate(vehicleNumber);
+    if (!plateCheck.valid) {
+      setError(plateCheck.error);
       return;
     }
     setError('');

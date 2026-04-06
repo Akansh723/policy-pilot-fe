@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from '../Input/Input';
 import { VehicleDetails } from '../../services/VehicleService';
+import { validateVehiclePlate, validateAlphaText, validateYear, sanitize } from '../../utils/validation';
 import styles from './ManualEntryForm.module.css';
 
 interface ManualEntryFormProps {
@@ -19,12 +20,14 @@ export const ManualEntryForm: React.FC<ManualEntryFormProps> = ({ onSubmit, onBa
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.vehicleNumber.trim()) newErrors.vehicleNumber = 'Required';
-    if (!formData.manufacturer.trim()) newErrors.manufacturer = 'Required';
-    if (!formData.model.trim()) newErrors.model = 'Required';
-    if (!formData.year || parseInt(formData.year) < 1900 || parseInt(formData.year) > new Date().getFullYear()) {
-      newErrors.year = 'Invalid year';
-    }
+    const plateCheck = validateVehiclePlate(formData.vehicleNumber);
+    if (!plateCheck.valid) newErrors.vehicleNumber = plateCheck.error;
+    const mfgCheck = validateAlphaText(formData.manufacturer, 'Manufacturer');
+    if (!mfgCheck.valid) newErrors.manufacturer = mfgCheck.error;
+    const modelCheck = validateAlphaText(formData.model, 'Model');
+    if (!modelCheck.valid) newErrors.model = modelCheck.error;
+    const yearCheck = validateYear(formData.year);
+    if (!yearCheck.valid) newErrors.year = yearCheck.error;
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -33,9 +36,9 @@ export const ManualEntryForm: React.FC<ManualEntryFormProps> = ({ onSubmit, onBa
     e.preventDefault();
     if (validate()) {
       onSubmit({
-        vehicleNumber: formData.vehicleNumber,
-        manufacturer: formData.manufacturer,
-        model: formData.model,
+        vehicleNumber: sanitize(formData.vehicleNumber),
+        manufacturer: sanitize(formData.manufacturer),
+        model: sanitize(formData.model),
         year: parseInt(formData.year)
       });
     }

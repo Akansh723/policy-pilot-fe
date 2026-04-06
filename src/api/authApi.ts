@@ -8,23 +8,24 @@ export const requestOtp = async (mobile: string): Promise<void> => {
   }
 };
 
-export const verifyOtp = async (mobile: string, otp: string): Promise<{ token: string; isNewUser: boolean; userName?: string }> => {
-  const response = await post<{ token: string; user: any; isNewUser: boolean }>(
+export interface AuthUser {
+  name?: string;
+  mobile?: string;
+  [key: string]: any;
+}
+
+export const verifyOtp = async (mobile: string, otp: string): Promise<{ user: AuthUser; isNewUser: boolean }> => {
+  const response = await post<{ user: AuthUser; isNewUser: boolean }>(
     API_ENDPOINTS.AUTH.VERIFY_OTP,
-    { mobile, otp }
+    { mobile, otp },
+    true
   );
   if (!response.success || !response.data) {
     throw new Error(response.message);
   }
-  
-  // Store user name in localStorage if available
-  if (response.data.user?.name) {
-    localStorage.setItem('userName', response.data.user.name);
-  }
-  
-  return { 
-    token: response.data.token, 
-    isNewUser: response.data.isNewUser,
-    userName: response.data.user?.name 
-  };
+  return { user: response.data.user, isNewUser: response.data.isNewUser };
+};
+
+export const logout = async (): Promise<void> => {
+  await post(API_ENDPOINTS.AUTH.LOGOUT, {}, true);
 };
