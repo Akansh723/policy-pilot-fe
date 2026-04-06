@@ -3,6 +3,10 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
+ARG REACT_APP_API_BASE_URL
+
+ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
+
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
@@ -11,11 +15,7 @@ RUN yarn build
 
 # Production stage
 FROM nginx:alpine
-# Accept build arg
-ARG REACT_APP_API_BASE_URL
 
-# Expose to app
-ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
 # Remove default nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
