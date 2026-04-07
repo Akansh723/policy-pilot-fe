@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /sign-in
+Allow: /get-a-quote
+
+Disallow: /policies
+Disallow: /review
+Disallow: /quote
+Disallow: /policy-review
+Disallow: /success
+Disallow: /user-details
+Disallow: /registration
+
+Sitemap: https://policy-pilot-157386566439.europe-west1.run.app/sitemap.xml
