@@ -14,6 +14,7 @@ import { PurchaseSuccess } from './pages/PurchaseSuccess';
 import { PolicySuggestion } from './api/policyApi';
 import { getUserProfile } from './api/userApi';
 import { logout } from './api/authApi';
+import { clearCsrfToken } from './api/httpClient';
 import './App.css';
 
 interface PurchaseData {
@@ -53,7 +54,7 @@ function QuoteFlow() {
   }, []);
 
   const handleLogout = async () => {
-    try { await logout(); } catch {}
+    try { await logout(); } catch { clearCsrfToken(); }
     setIsAuthenticated(false);
     navigate('/');
   };

@@ -8,7 +8,7 @@ interface UpdateProfileData {
 }
 
 export const updateProfile = async (data: UpdateProfileData): Promise<void> => {
-  const response = await put(API_ENDPOINTS.USER.PROFILE, data, true);
+  const response = await put(API_ENDPOINTS.USER.PROFILE, data);
   if (!response.success) {
     throw new Error(response.message);
   }
@@ -24,7 +24,7 @@ interface UserProfile {
 }
 
 export const getUserProfile = async (): Promise<UserProfile> => {
-  const response = await get<UserProfile>(API_ENDPOINTS.USER.PROFILE, true);
+  const response = await get<UserProfile>(API_ENDPOINTS.USER.PROFILE);
   if (!response.success || !response.data) {
     throw new Error(response.message);
   }
@@ -61,7 +61,7 @@ interface PurchaseResponse {
 }
 
 export const purchasePolicy = async (data: PurchasePolicyData): Promise<PurchaseResponse> => {
-  const response = await post<PurchaseResponse>(API_ENDPOINTS.POLICY.PURCHASE, data, true);
+  const response = await post<PurchaseResponse>(API_ENDPOINTS.POLICY.PURCHASE, data);
   if (!response.success || !response.data) {
     throw new Error(response.message);
   }

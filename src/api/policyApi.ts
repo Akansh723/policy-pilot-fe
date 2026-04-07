@@ -83,7 +83,7 @@ export interface MyPolicy {
 }
 
 export const getMyPolicies = async (): Promise<MyPolicy[]> => {
-  const response = await get<MyPolicy[]>(API_ENDPOINTS.POLICY.MY, true);
+  const response = await get<MyPolicy[]>(API_ENDPOINTS.POLICY.MY);
   if (!response.success || !response.data) {
     throw new Error(response.message);
   }
