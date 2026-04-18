@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { QuoteFlowProvider } from '@/context/QuoteFlowContext';
+import { LazyFontLoader } from '@/components/LazyFontLoader';
 import '@/global.css';
 
 export const metadata: Metadata = {
@@ -37,14 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <style dangerouslySetInnerHTML={{ __html: `*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;min-height:max(884px,100dvh)}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.app{min-height:100vh;display:flex;flex-direction:column;background:#f8fafc}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}` }} />
         <link rel="canonical" href="https://policy-pilot-157386566439.europe-west1.run.app/" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="preload"
-          as="style"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        />
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
         <meta name="theme-color" content="#0A2540" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <script
@@ -63,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <LazyFontLoader />
         <QuoteFlowProvider>
           <div className="app" role="application">
             <a href="#main-content" className="sr-only">Skip to main content</a>
