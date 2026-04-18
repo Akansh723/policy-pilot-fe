@@ -3,30 +3,24 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
-ARG REACT_APP_API_BASE_URL
+ARG NEXT_PUBLIC_API_BASE_URL
 
-ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY package.json package-lock.json* ./
+RUN npm ci
 
 COPY . .
-RUN yarn build
+RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
-# Remove default nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/out /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY entrypoint.sh /entrypoint.sh
 
-# Make entrypoint executable
-RUN chmod +x /entrypoint.sh
-
-# Create nginx user and set permissions
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
@@ -39,4 +33,4 @@ USER nginx
 
 EXPOSE 8080
 
-CMD ["/entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]
