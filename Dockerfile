@@ -7,11 +7,11 @@ ARG NEXT_PUBLIC_API_BASE_URL
 
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json yarn.lock* ./
+RUN yarn install --frozen-lockfile
 
 COPY . .
-RUN npm run build
+RUN yarn build
 
 # Production stage
 FROM nginx:alpine
