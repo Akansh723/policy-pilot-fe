@@ -2,11 +2,14 @@ var fs = require('fs');
 var path = require('path');
 
 var outDir = path.join(__dirname, '..', 'out');
-var nrPath = path.join(outDir, 'newrelic.js');
-var nrScript = '';
 
-if (fs.existsSync(nrPath)) {
-  nrScript = '<script>' + fs.readFileSync(nrPath, 'utf8') + '<\/script>';
+// New Relic: inline config + CDN loader
+var nrConfigPath = path.join(outDir, 'newrelic-config.js');
+var nrSnippet = '';
+if (fs.existsSync(nrConfigPath)) {
+  var config = fs.readFileSync(nrConfigPath, 'utf8');
+  nrSnippet = '<script>' + config + '<\/script>' +
+    '<script src="https://js-agent.newrelic.com/nr-loader-spa-current.min.js"><\/script>';
 }
 
 function process(htmlPath) {
@@ -27,9 +30,9 @@ function process(htmlPath) {
   // Remove RSC CSS hints
   html = html.replace(/\d+:HL\[\\"(\/_next\/static\/css\/[^"]+\.css)\\",\\"style\\"\]\\n/g, '');
 
-  // Inject New Relic script right after <head>
-  if (nrScript) {
-    html = html.replace('<head>', '<head>' + nrScript);
+  // Inject New Relic right after <head>
+  if (nrSnippet) {
+    html = html.replace('<head>', '<head>' + nrSnippet);
   }
 
   fs.writeFileSync(htmlPath, html);
@@ -37,4 +40,4 @@ function process(htmlPath) {
 
 var htmlFiles = fs.readdirSync(outDir).filter(function(f) { return f.endsWith('.html'); });
 htmlFiles.forEach(function(f) { process(path.join(outDir, f)); });
-console.log('Processed ' + htmlFiles.length + ' HTML files' + (nrScript ? ' (with New Relic)' : ''));
+console.log('Processed ' + htmlFiles.length + ' HTML files' + (nrSnippet ? ' (with New Relic)' : ''));
