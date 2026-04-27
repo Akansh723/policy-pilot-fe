@@ -5,7 +5,7 @@ import { Header } from '../../components/shared/Header';
 import { Button } from '../../components/shared/Button';
 import { Loader } from '../../components/shared/Loader';
 import { PolicySuggestion } from '../../api/policyApi';
-import { purchasePolicy } from '../../api/userApi';
+import { purchasePolicy, verifyPayment } from '../../api/userApi';
 import { VehicleData } from '../../context/QuoteFlowContext';
 import styles from './PolicyReview.module.css';
 
@@ -29,6 +29,19 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
   const [agreed, setAgreed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]')) {
+        return resolve(true);
+      }
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
 
   const handleProceed = async () => {
     setLoading(true);
@@ -59,7 +72,45 @@ export const PolicyReview: React.FC<PolicyReviewProps> = ({
         addonsPremium,
       });
 
-      onNext(response.purchaseId);
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        throw new Error('Failed to load Razorpay SDK');
+      }
+
+      const options = {
+        key: response.keyId,
+        amount: response.amount,
+        currency: response.currency,
+        order_id: response.orderId,
+        name: 'PolicyPilot',
+        description: 'Insurance Policy Purchase',
+        handler: async (razorpayResponse: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
+          try {
+            setLoading(true);
+            await verifyPayment({
+              razorpayOrderId: razorpayResponse.razorpay_order_id,
+              razorpayPaymentId: razorpayResponse.razorpay_payment_id,
+              razorpaySignature: razorpayResponse.razorpay_signature,
+            });
+            onNext(response.purchaseId);
+          } catch (err) {
+            setError(err instanceof Error ? err.message : 'Payment verification failed');
+          } finally {
+            setLoading(false);
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            setError('Payment was cancelled');
+          },
+        },
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.on('payment.failed', (resp: any) => {
+        setError(resp.error?.description || 'Payment failed');
+      });
+      rzp.open();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to purchase policy');
     } finally {
