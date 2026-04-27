@@ -58,10 +58,33 @@ interface PurchaseResponse {
   policyExpiryDate: string;
   totalPremium: number;
   status: string;
+  orderId: string;
+  amount: number;
+  currency: string;
+  keyId: string;
+}
+
+interface VerifyPaymentData {
+  razorpayOrderId: string;
+  razorpayPaymentId: string;
+  razorpaySignature: string;
+}
+
+interface VerifyPaymentResponse {
+  purchaseId: string;
+  status: string;
 }
 
 export const purchasePolicy = async (data: PurchasePolicyData): Promise<PurchaseResponse> => {
   const response = await post<PurchaseResponse>(API_ENDPOINTS.POLICY.PURCHASE, data);
+  if (!response.success || !response.data) {
+    throw new Error(response.message);
+  }
+  return response.data;
+};
+
+export const verifyPayment = async (data: VerifyPaymentData): Promise<VerifyPaymentResponse> => {
+  const response = await post<VerifyPaymentResponse>(API_ENDPOINTS.POLICY.VERIFY_PAYMENT, data);
   if (!response.success || !response.data) {
     throw new Error(response.message);
   }

@@ -14,11 +14,15 @@ export const setCsrfToken = (token: string) => {
 
 export const clearCsrfToken = () => {
   csrfToken = '';
+  sessionStorage.removeItem('csrf-token');
 };
 
 const extractCsrfToken = (response: Response): void => {
   const token = response.headers.get('x-csrf-token');
-  if (token) csrfToken = token;
+  if (token) {
+    csrfToken = token;
+    sessionStorage.setItem('csrf-token', token);
+  }
 };
 
 const sanitizePayload = (obj: unknown): unknown => {
@@ -45,6 +49,9 @@ export const get = async <T>(endpoint: string): Promise<ApiResponse<T>> => {
 };
 
 export const post = async <T>(endpoint: string, data: unknown): Promise<ApiResponse<T>> => {
+  if (!csrfToken) {
+    csrfToken = sessionStorage.getItem('csrf-token') || '';
+  }
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (csrfToken) {
     headers['x-csrf-token'] = csrfToken;
@@ -64,6 +71,9 @@ export const post = async <T>(endpoint: string, data: unknown): Promise<ApiRespo
 };
 
 export const put = async <T>(endpoint: string, data: unknown): Promise<ApiResponse<T>> => {
+  if (!csrfToken) {
+    csrfToken = sessionStorage.getItem('csrf-token') || '';
+  }
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (csrfToken) {
     headers['x-csrf-token'] = csrfToken;
